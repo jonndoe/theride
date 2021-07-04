@@ -10,6 +10,8 @@ Rides sharing app
      :target: https://github.com/ambv/black
      :alt: Black code style
 
+[![pipeline status](https://gitlab.com/YOUR_GITLAB_NAMESPACE/django-tdd-docker/badges/master/pipeline.svg)](https://gitlab.com/YOUR_GITLAB_NAMESPACE/django-tdd-docker/commits/master)
+
 :License: MIT
 
 Settings
