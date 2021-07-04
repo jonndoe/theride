@@ -1,6 +1,7 @@
 image: docker:stable
 
 stages:
+  - deploy
   - build
   - lint
   - test
@@ -13,6 +14,32 @@ variables:
   POSTGRES_DB: 'test_theride'
   POSTGRES_HOST_AUTH_METHOD: trust
   
+deploy:
+  stage: deploy
+  services:
+    - docker:dind
+  variables:
+    DOCKER_DRIVER: overlay2
+    HEROKU_APP_NAME: stunning-mount-rainier-29160
+    HEROKU_REGISTRY_IMAGE: registry.heroku.com/${HEROKU_APP_NAME}/web
+  script:
+    # Install cURL
+    - apk add --no-cache curl
+    # Build and tag the new image
+    - docker build
+        --tag $HEROKU_REGISTRY_IMAGE
+        --file ./compose/production/django/Dockerfile.heroku
+        "."
+    # Log in to the Heroku Container Registry
+    - docker login -u _ -p $HEROKU_AUTH_TOKEN registry.heroku.com
+    # Push the image up to the registry
+    - docker push $HEROKU_REGISTRY_IMAGE
+    # Create a new release via the Heroku API 
+    # using the image ID within the release.sh script
+    - cd ./heroku
+    - chmod +x ./release.sh
+    - ./release.sh
+
 build:
   stage: build
   services:
@@ -20,13 +47,17 @@ build:
   variables:
     DOCKER_DRIVER: overlay2
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    # Log in to the GitLab Container Registry
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY 
+    # Pull the previously pushed image (if it exists)
     - docker pull $IMAGE:latest || true
+    # Build and tag the new image
     - docker build
         --cache-from $IMAGE:latest
         --tag $IMAGE:latest
         --file ./compose/production/django/Dockerfile
         "."
+    # Push the image up to the GitLab Container Registry
     - docker push $IMAGE:latest
 
 flake8:
