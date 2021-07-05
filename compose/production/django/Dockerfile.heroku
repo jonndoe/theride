@@ -86,6 +86,8 @@ RUN chown django:django ${APP_HOME}
 
 USER django
 
+CMD python /app/manage.py makemigrations --noinput
+CMD python /app/manage.py migrate --noinput
 CMD python /app/manage.py collectstatic --noinput
 
 
