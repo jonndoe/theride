@@ -21,6 +21,7 @@ ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["theride.com"])
 
 DATABASE_URL = 'postgres://xellzhdobzbruq:656ac6fab9e04adf1f62dba0360f965a67144bdafe3b5e642f46261d90d9fc5a@ec2-54-227-246-76.compute-1.amazonaws.com:5432/d8tpg21d5251qv'
 db_from_env = dj_database_url.parse('postgres://xellzhdobzbruq:656ac6fab9e04adf1f62dba0360f965a67144bdafe3b5e642f46261d90d9fc5a@ec2-54-227-246-76.compute-1.amazonaws.com:5432/d8tpg21d5251qv', conn_max_age=500)
+DATABASES = {}
 DATABASES['default'].update(db_from_env)
 
 # CACHES
