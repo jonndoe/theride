@@ -1,5 +1,8 @@
 from .base import *  # noqa
 from .base import env
+import dj_database_url
+import os
+
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -14,6 +17,10 @@ ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["theride.com"])
 DATABASES["default"] = env.db("DATABASE_URL")  # noqa F405
 DATABASES["default"]["ATOMIC_REQUESTS"] = True  # noqa F405
 DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # noqa F405
+
+DATABASE_URL = os.environ.get('DATABASE_URL')
+db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # CACHES
 # ------------------------------------------------------------------------------
