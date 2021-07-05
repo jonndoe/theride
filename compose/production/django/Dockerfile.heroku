@@ -40,6 +40,8 @@ ENV SECRET_KEY $SECRET_KEY
 ENV DJANGO_SETTINGS_MODULE=config.settings.production.heroku
 ENV DJANGO_ACCOUNT_ALLOW_REGISTRATION=True
 ENV WEB_CONCURRENCY=4
+ENV DJANGO_ADMIN_URL=adminofherokuapp
+ENV DJANGO_SECURE_SSL_REDIRECT=False
 
 WORKDIR ${APP_HOME}
 
@@ -86,7 +88,6 @@ USER django
 
 CMD python /app/manage.py collectstatic --noinput
 
-ENV DJANGO_SETTINGS_MODULE=config.settings.production.heroku
 
 # run gunicorn
 CMD /usr/local/bin/gunicorn config.wsgi --bind 0.0.0.0:$PORT --chdir=/app
