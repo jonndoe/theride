@@ -9,4 +9,3 @@ document.addEventListener("turbolinks:load", function () {
 
 
 console.log('Entered project.js file!!!');
-

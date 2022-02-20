@@ -15,6 +15,3 @@ import("./js/project");
 
 
 //import("../blog/javascript/all_reflexes");
-
-
-

@@ -9,5 +9,3 @@ services:
     env_file:
       - ./.envs/.heroku/.django
       - ./.envs/.heroku/.postgres
-
-
