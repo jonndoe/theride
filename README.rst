@@ -6,6 +6,26 @@ theride
 =======
 
 
+
+This is just an example folder.
+
+Do not do any developments here.
+
+
+Copy this folder to another location, and start developing there with separate
+git initialization.
+
+This project has CI/CD gitlab - heroku pipeline set up and working.
+
+Reffer to this project's commits if you need help.
+
+
+
+
+
+
+
+
 Rides sharing app
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter
