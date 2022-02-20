@@ -1,10 +1,10 @@
 """
 Base settings to build other settings files upon.
 """
+import os
 from pathlib import Path
 
 import environ
-import os
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # theride/
@@ -50,7 +50,7 @@ DATABASES["default"]["ATOMIC_REQUESTS"] = True
 ROOT_URLCONF = "config.urls"
 # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = "config.wsgi.application"
-ASGI_APPLICATION = 'sockpuppet.routing.application'
+ASGI_APPLICATION = "sockpuppet.routing.application"
 
 # APPS
 # ------------------------------------------------------------------------------
@@ -195,32 +195,26 @@ TEMPLATES = [
 ]
 
 
-
-
 # CACHES
 # ------------------------------------------------------------------------------
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": os.environ.get('REDIS_URL'),
+        "LOCATION": os.environ.get("REDIS_URL"),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
+        },
     }
 }
 
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [os.environ.get('REDIS_URL')],
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get("REDIS_URL")],
         },
     },
 }
-
-
-
-
 
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#form-renderer

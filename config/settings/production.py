@@ -1,30 +1,33 @@
-from .base import *  # noqa
-from .base import env
-import dj_database_url
 import os
 
+import dj_database_url
+
+from .base import *  # noqa
+from .base import env
 
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-#SECRET_KEY = env("DJANGO_SECRET_KEY")
-SECRET_KEY = 'KAJSDHFLAKSDFHLASDKFJASHLDFKJASHLDFKAJSDFASLKJDFHLASDKJFHLASDKFJHASLDKFJASHLDKFJHALSKDJFHLASKJDFHLASKJDFHLAKSJDFHLASKJDFHL'
+# SECRET_KEY = env("DJANGO_SECRET_KEY")
+SECRET_KEY = "KAJSDHFLAKSDFHLASDKFJASHLDFKJASHLDFKAJSDFASLKJDFHLASDKJFHLASDKFJHASLDKFJASHLDKFJHALSKDJFHLASKJDFHLASKJDFHLAKSJDFHLASKJDFHL"
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["theride.com"])
 
 # DATABASES
 # ------------------------------------------------------------------------------
-#DATABASES["default"] = env.db("DATABASE_URL")  # noqa F405
-#DATABASES["default"]["ATOMIC_REQUESTS"] = True  # noqa F405
-#DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # noqa F405
+# DATABASES["default"] = env.db("DATABASE_URL")  # noqa F405
+# DATABASES["default"]["ATOMIC_REQUESTS"] = True  # noqa F405
+# DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # noqa F405
 
 
-#DATABASE_URL = 'postgres://xellzhdobzbruq:656ac6fab9e04adf1f62dba0360f965a67144bdafe3b5e642f46261d90d9fc5a@ec2-54-227-246-76.compute-1.amazonaws.com:5432/d8tpg21d5251qv'
-#db_from_env = dj_database_url.parse('postgres://xellzhdobzbruq:656ac6fab9e04adf1f62dba0360f965a67144bdafe3b5e642f46261d90d9fc5a@ec2-54-227-246-76.compute-1.amazonaws.com:5432/d8tpg21d5251qv', conn_max_age=500)
-#DATABASES['default'].update(db_from_env)
-DATABASE_URL = os.environ.get('DATABASE_URL')
+# DATABASE_URL = 'postgres://xellzhdobzbruq:656ac6fab9e04adf1f62db
+# a0360f965a67144bdafe3b5e642f46261d90d9fc5a@ec2-54-227-246-76.compute-1.amazonaws.com:5432/d8tpg21d5251qv'
+# db_from_env = dj_database_url.parse('postgres://xellzhdobzbruq:656ac6fab9e04adf1f
+# 62dba0360f965a67144bdafe3b5e642f46261d90d9fc5a@ec2-54-227-246-76.compute-1.amazonaws.com:5432/d8tpg21d5251qv', conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
+DATABASE_URL = os.environ.get("DATABASE_URL")
 db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+DATABASES["default"].update(db_from_env)
 
 # CACHES
 # ------------------------------------------------------------------------------
